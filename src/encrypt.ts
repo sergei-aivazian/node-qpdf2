@@ -52,7 +52,7 @@ export interface EncryptOptions {
     /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-modify-other */
     modifyOther?: "y" | "n";
     /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-print */
-    print?: "y" | "n" | "full" | "low" | "none";
+    print?: "full" | "low" | "none";
     /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-use-aes */
     useAes?: "y" | "n";
   };
