@@ -25,7 +25,7 @@ A very simple wrapper for [qpdf](https://github.com/qpdf/qpdf) which is performs
 
 ## Serverless?
 
-This package can be uses on serverless platforms by using your vendor's layers functionality. Use the zip release from `qpdf` as the layer. For example, `qpdf-11.1.0-bin-linux-x86_64.zip` can be directly uploaded as a layer, and has been tested using Amazon Lambda.
+This package can be used on serverless platforms by using your vendor's layers functionality. Use the zip release from `qpdf` as the layer. For example, `qpdf-11.1.0-bin-linux-x86_64.zip` can be directly uploaded as a layer, and has been tested using Amazon Lambda.
 
 ## Encryption
 
