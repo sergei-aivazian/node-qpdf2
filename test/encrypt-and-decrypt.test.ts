@@ -1,80 +1,80 @@
-import test from "ava";
+import { expect, test } from "vitest";
 
 import { decrypt, encrypt } from "../src/index.js";
 
 const input = "test/example.pdf";
 
-test.serial("Should encrypt a file with a space", async (t) => {
-  await t.notThrowsAsync(async () => {
-    await encrypt({
+test("Should encrypt a file with a space", async () => {
+  await expect(
+    encrypt({
       input: "test/example copy.pdf",
       output: "test/output/file to file.pdf",
       password: "1234",
-    });
-  });
+    }),
+  ).resolves.toBeTruthy();
 });
 
-test.serial("Should decrypt a file with a space", async (t) => {
-  await t.notThrowsAsync(async () => {
-    await decrypt({
+test("Should decrypt a file with a space", async () => {
+  await expect(
+    decrypt({
       input: "test/output/file to file.pdf",
       password: "1234",
-    });
-  });
+    }),
+  ).resolves.toBeTruthy();
 });
 
-test.serial("Should encrypt a File without a password", async (t) => {
-  await t.notThrowsAsync(async () => {
-    await encrypt({
+test("Should encrypt a File without a password", async () => {
+  await expect(
+    encrypt({
       input,
       output: "test/output/file-to-file-no-pw.pdf",
-    });
-  });
+    }),
+  ).resolves.toBeTruthy();
 });
 
-test.serial("Should decrypt a File without a password", async (t) => {
-  await t.notThrowsAsync(async () => {
-    await decrypt({
+test("Should decrypt a File without a password", async () => {
+  await expect(
+    decrypt({
       input: "test/output/file-to-file-no-pw.pdf",
       output: "test/output/file-to-file-no-pw-decrypted.pdf",
-    });
-  });
+    }),
+  ).resolves.toBeTruthy();
 });
 
-test.serial("Should encrypt to a file", async (t) => {
-  await t.notThrowsAsync(async () => {
-    await encrypt({
+test("Should encrypt to a file", async () => {
+  await expect(
+    encrypt({
       input,
       output: "test/output/encrypted.pdf",
       password: "1234",
-    });
-  });
+    }),
+  ).resolves.toBeTruthy();
 });
 
-test.serial("Should decrypt from a file", async (t) => {
-  await t.notThrowsAsync(async () => {
-    await decrypt({
+test("Should decrypt from a file", async () => {
+  await expect(
+    decrypt({
       input: "test/output/encrypted.pdf",
       output: "test/output/decrypted.pdf",
       password: "1234",
-    });
-  });
+    }),
+  ).resolves.toBeTruthy();
 });
 
-test.serial("Should encrypt File -> Buffer", async (t) => {
+test("Should encrypt File -> Buffer", async () => {
   const BufferFromFile = await encrypt({
     input,
     password: "1234",
   });
-  t.true(Buffer.isBuffer(BufferFromFile));
+  expect(Buffer.isBuffer(BufferFromFile)).toBe(true);
 });
 
-test.serial("Should decrypt a File -> Buffer", async (t) => {
+test("Should decrypt a File -> Buffer", async () => {
   const BufferFromFile = await decrypt({
     input: "test/output/encrypted.pdf",
     password: "1234",
   });
-  t.true(Buffer.isBuffer(BufferFromFile));
+  expect(Buffer.isBuffer(BufferFromFile)).toBe(true);
 });
 
 // Not sure this can happen: https://github.com/qpdf/qpdf/issues/54
