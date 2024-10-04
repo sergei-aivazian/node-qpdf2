@@ -45,7 +45,7 @@ await encrypt(pdf);
 
 ### Options for Encryption
 
-Please see [src/encrypt.ts](https://github.com/Sparticuz/node-qpdf2/blob/master/src/encrypt.ts#L9) for the latest options, as well as [QPDF's documentation](https://qpdf.readthedocs.io/en/stable/cli.html#encryption) for information on what each restriction does.
+Please see [src/encrypt.ts](https://github.com/Sparticuz/node-qpdf2/blob/master/src/encrypt.ts) for the latest options, as well as [QPDF's documentation](https://qpdf.readthedocs.io/en/stable/cli.html#encryption) for information on what each restriction does.
 
 ### Examples
 
@@ -103,15 +103,17 @@ If the file is not encrypted, the result will be "File is not encrypted".
 
 ## Coverage
 
-| File       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s |
-| ---------- | ------- | -------- | ------- | ------- | ----------------- |
-| All files  | 100     | 100      | 100     | 100     |
-| decrypt.ts | 100     | 100      | 100     | 100     |
-| encrypt.ts | 100     | 100      | 100     | 100     |
-| index.ts   | 100     | 100      | 100     | 100     |
-| info.ts    | 100     | 100      | 100     | 100     |
-| spawn.ts   | 100     | 100      | 100     | 100     |
-| utils.ts   | 100     | 100      | 100     | 100     |
+------------|---------|----------|---------|---------|-------------------
+File | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+------------|---------|----------|---------|---------|-------------------
+All files | 100 | 100 | 100 | 100 |
+decrypt.ts | 100 | 100 | 100 | 100 |
+encrypt.ts | 100 | 100 | 100 | 100 |
+index.ts | 100 | 100 | 100 | 100 |
+info.ts | 100 | 100 | 100 | 100 |
+spawn.ts | 100 | 100 | 100 | 100 |
+utils.ts | 100 | 100 | 100 | 100 |
+------------|---------|----------|---------|---------|-------------------
 
 ## Contributing
 

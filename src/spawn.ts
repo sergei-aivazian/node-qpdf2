@@ -3,6 +3,7 @@
 
 import { spawn } from "node:child_process";
 
+// eslint-disable-next-line unicorn/no-anonymous-default-export
 export default (callArguments: string[]): Promise<Buffer> =>
   new Promise((resolve, reject) => {
     const process = spawn("qpdf", callArguments);
@@ -24,7 +25,7 @@ export default (callArguments: string[]): Promise<Buffer> =>
         resolve(Buffer.from(stdout.join("")));
       } else {
         // There is a problem from qpdf
-        reject(Buffer.from(stderr.join("")).toLocaleString());
+        reject(new Error(Buffer.from(stderr.join("")).toLocaleString()));
       }
     });
   });

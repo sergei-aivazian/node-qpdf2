@@ -1,12 +1,19 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Base Default TSConfig",
   "extends": ["@tsconfig/node18/tsconfig", "@tsconfig/strictest/tsconfig"],
   "compilerOptions": {
     "declaration": true,
+    "declarationMap": true,
     "exactOptionalPropertyTypes": false,
     "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "nodenext",
+    "noUnusedLocals": false,
     "outDir": "dist",
-    "sourceMap": true
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "verbatimModuleSyntax": true
   },
-  "include": ["src", "test"]
+  "include": ["src", "test", "vitest.config.ts"],
+  "exclude": ["node_modules", "dist"]
 }
