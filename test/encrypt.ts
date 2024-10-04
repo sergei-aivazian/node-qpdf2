@@ -1,6 +1,5 @@
-import { copyFile } from "node:fs/promises";
-
 import test from "ava";
+import { copyFile } from "node:fs/promises";
 
 import { encrypt } from "../src/encrypt.js";
 
@@ -119,7 +118,6 @@ test("should throw if restrictions are wrong", async (t) => {
 test("Should encrypt and overwrite the file", async (t) => {
   await t.notThrowsAsync(async () => {
     // First, copy example.pdf to output/overwrite.pdf
-    // eslint-disable-next-line sonarjs/no-duplicate-string
     await copyFile("test/example.pdf", "test/output/overwrite.pdf");
     await encrypt({
       input: "test/output/overwrite.pdf",

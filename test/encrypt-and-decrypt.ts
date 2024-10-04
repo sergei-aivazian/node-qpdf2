@@ -45,7 +45,6 @@ test.serial("Should encrypt to a file", async (t) => {
   await t.notThrowsAsync(async () => {
     await encrypt({
       input,
-      // eslint-disable-next-line sonarjs/no-duplicate-string
       output: "test/output/encrypted.pdf",
       password: "1234",
     });
@@ -79,11 +78,7 @@ test.serial("Should decrypt a File -> Buffer", async (t) => {
 });
 
 // Not sure this can happen: https://github.com/qpdf/qpdf/issues/54
-// eslint-disable-next-line ava/no-todo-test
 test.todo("Should encrypt a Buffer -> File");
-// eslint-disable-next-line ava/no-todo-test
 test.todo("Should decrypt a Buffer -> File");
-// eslint-disable-next-line ava/no-todo-test
 test.todo("Should encrypt a Buffer -> Buffer");
-// eslint-disable-next-line ava/no-todo-test
 test.todo("Should decrypt a Buffer -> Buffer");
