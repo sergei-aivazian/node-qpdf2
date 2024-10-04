@@ -5,16 +5,13 @@ const EncryptDefaults = {
   keyLength: 256,
   overwrite: true,
 };
-
-export interface EncryptOptions {
+type BaseYesNoOptions = "y" | "n"
+type BasePrintOptions = "full" | "low" | "none"
+interface BaseEncryptOptions {
+  /** Optional - Path to custom qpdf binary */
+  qpdfPath?: string
   /** The location of the unencrypted pdf file */
   input: string;
-  /**
-   * A number which defines the encryption algorithm to be used.
-   * Using a keyLengh of 40 is insecure.
-   * @default 256
-   */
-  keyLength?: 40 | 128 | 256;
   /** If defined, the output location of the encrypted pdf. If not defined, a Buffer will be returned. */
   output?: string;
   /**
@@ -27,36 +24,58 @@ export interface EncryptOptions {
    * Optionally, an object containing `user` and `owner` for setting different roles.
    * If undefined, will encrypt a pdf without requiring a password to decrypt
    */
-  password?:
-    | string
-    | {
-        owner: string;
-        user: string;
-      };
-  /** Restrictions for the encrypted pdf */
-  restrictions?: {
-    /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-accessibility */
-    accessibility?: "y" | "n";
-    /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-annotate */
-    annotate?: "y" | "n";
-    /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-assemble */
-    assemble?: "y" | "n";
-    /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-cleartext-metadata */
-    cleartextMetadata?: boolean;
-    /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-extract */
-    extract?: "y" | "n";
-    /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-form */
-    form?: "y" | "n";
-    /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-modify */
-    modify?: "y" | "n" | "all" | "annotate" | "form" | "assembly" | "none";
-    /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-modify-other */
-    modifyOther?: "y" | "n";
-    /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-print */
-    print?: "y" | "n" | "full" | "low" | "none";
-    /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-use-aes */
-    useAes?: "y" | "n";
+  password?: string| {
+    owner: string;
+    user: string;
   };
 }
+interface BaseRestrictionsOptions {
+  /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-accessibility */
+  accessibility?: BaseYesNoOptions;
+  /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-annotate */
+  annotate?: BaseYesNoOptions;
+  /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-assemble */
+  assemble?: BaseYesNoOptions;
+  /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-cleartext-metadata */
+  cleartextMetadata?: boolean;
+  /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-extract */
+  extract?: BaseYesNoOptions;
+  /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-form */
+  form?: BaseYesNoOptions;
+  /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-modify */
+  modify?: BaseYesNoOptions | "all" | "annotate" | "form" | "assembly" | "none";
+  /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-modify-other */
+  modifyOther?: BaseYesNoOptions;
+  /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-use-aes */
+  useAes?: BaseYesNoOptions;
+}
+interface Encrypt40bitOptions extends BaseEncryptOptions {
+  /**
+   * A number which defines the encryption algorithm to be used.
+   * Using a keyLengh of 40 is insecure.
+   * @default 256
+   */
+  keyLength?: 40
+  /** Restrictions for the encrypted pdf */
+  restrictions?: {
+    /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-print */
+    print?: BaseYesNoOptions | BasePrintOptions;
+  } & BaseRestrictionsOptions;
+}
+interface EncryptDefaultOptions extends BaseEncryptOptions {
+  /**
+   * A number which defines the encryption algorithm to be used.
+   * Using a keyLengh of 40 is insecure.
+   * @default 256
+   */
+  keyLength?: 128 | 256;
+  /** Restrictions for the encrypted pdf */
+  restrictions?: {
+    /** Please see: https://qpdf.readthedocs.io/en/stable/cli.html#option-print */
+    print?: BasePrintOptions;
+  } & BaseRestrictionsOptions;
+}
+export type EncryptOptions = Encrypt40bitOptions | EncryptDefaultOptions
 
 /**
  * Encrypts a PDF file
