@@ -111,7 +111,7 @@ test("Should encrypt and overwrite the file", async () => {
   // First, copy example.pdf to output/overwrite.pdf
   await copyFile("test/example.pdf", "test/output/overwrite.pdf");
   await expect(
-    await encrypt({
+    encrypt({
       input: "test/output/overwrite.pdf",
       output: "test/output/overwrite.pdf",
       overwrite: true,
